@@ -33,3 +33,6 @@ mod tests {
         assert!(parser_for(Path::new("a.txt")).unwrap().is_none());
     }
 }
+
+mod facts;
+pub use facts::*;
