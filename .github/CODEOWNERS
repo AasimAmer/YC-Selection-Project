@@ -1,0 +1,16 @@
+/crates/faultline-parser/    @AasimAmer
+/crates/faultline-core/      @AasimAmer
+/crates/faultline-index/     @AasimAmer
+/crates/faultline-engine/    @AasimAmer
+/crates/faultline-cli/       @abdham30
+/crates/faultline-tui/       @abdham30
+/crates/faultline-eval/      @abdham30
+/crates/faultline-testkit/   @abdham30
+/docs/                      @abdham30
+/crates/faultline-contract/  @AasimAmer @abdham30
+/Cargo.toml                 @AasimAmer @abdham30
+/Cargo.lock                 @AasimAmer @abdham30
+/fixtures/                   @abdham30
+/.github/                    @abdham30
+/.github/CODEOWNERS          @AasimAmer @abdham30
+/rust-toolchain.toml         @AasimAmer @abdham30
