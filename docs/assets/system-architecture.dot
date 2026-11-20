@@ -1,0 +1,16 @@
+digraph G {
+ graph [bgcolor="#0B1020",pad="0.4",nodesep="0.42",ranksep="0.7",splines=ortho,rankdir=LR,fontname="DejaVu Sans",label="FAULTLINE   •   FROM SOURCE TO EXPLAINABLE IMPACT",labelloc=t,fontsize=25,fontcolor="#E8EDF8"];
+ node [shape=box,style="rounded,filled",fontname="DejaVu Sans",fontsize=15,margin="0.20,0.14",color="#39516C",fillcolor="#13243A",fontcolor="#E8EDF8",penwidth=2]; edge [color="#6696AE",arrowsize=.8,penwidth=2];
+ repo[label="Repository\n& Git history",fillcolor="#223048"];
+ discovery[label="Discovery\n+ watcher"];
+ parse[label="Tree-sitter\nparsing"];
+ extract[label="Symbols / refs\n+ resolution"];
+ graphnode[label="Versioned\ndependency graph",color="#35D9E8",fillcolor="#104753"];
+ impact[label="Reverse traversal\n+ evidence"];
+ ui[label="Terminal UI",color="#A78BFA"];
+ cli[label="CLI / JSON\nAgent adapter",color="#A78BFA"];
+ store[label="SQLite\nsnapshots",color="#22C55E"];
+ eval[label="Historical commit\nevaluator",color="#F2BD4B"];
+ repo->discovery->parse->extract->graphnode->impact; impact->ui; impact->cli; graphnode->store[dir=both];repo->eval;cli->eval;
+ {rank=same;ui;cli;eval;}
+}

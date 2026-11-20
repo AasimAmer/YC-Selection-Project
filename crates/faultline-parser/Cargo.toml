@@ -1,0 +1,11 @@
+[package]
+name = "faultline-parser"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+tree-sitter.workspace = true
+tree-sitter-javascript.workspace = true
+tree-sitter-typescript.workspace = true
+faultline-contract.workspace = true

@@ -1,0 +1,14 @@
+digraph G {
+ graph[bgcolor="#0B1020",pad="0.4",rankdir=LR,nodesep="0.35",ranksep="0.5",splines=ortho,label="INCREMENTAL UPDATE — NO FULL REBUILD FOR A SINGLE FILE",labelloc=t,fontname="DejaVu Sans",fontsize=23,fontcolor="#E8EDF8"];
+ node[shape=box,style="rounded,filled",color="#42536A",fillcolor="#14233A",fontcolor="#E8EDF8",fontname="DejaVu Sans",fontsize=15,margin="0.20,0.16",penwidth=2];edge[color="#4F91A4",penwidth=2,arrowsize=.8];
+ event[label="Changed\nfile"];
+ hash[label="Debounce\n+ hash"];
+ parse[label="Incremental\nreparse"];
+ facts[label="Diff symbols\nand references"];
+ resolve[label="Re-resolve\naffected importers"];
+ commit[label="Atomic SQLite\ntransaction",color="#35D9E8",fillcolor="#104753"];
+ epoch[label="New snapshot\n+ cache invalidation",color="#22C55E"];
+ noop[label="Same hash\n→ no work",color="#F2BD4B"];
+ event->hash->parse->facts->resolve->commit->epoch;
+ hash->noop[style=dashed,color="#F2BD4B"];
+}

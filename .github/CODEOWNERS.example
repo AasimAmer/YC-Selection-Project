@@ -1,0 +1,13 @@
+# Rename to CODEOWNERS after replacing BOTH placeholders with actual GitHub handles.
+/crates/faultline-parser/    @ENGINE_GITHUB_USER
+/crates/faultline-core/      @ENGINE_GITHUB_USER
+/crates/faultline-index/     @ENGINE_GITHUB_USER
+/crates/faultline-engine/    @ENGINE_GITHUB_USER
+/crates/faultline-cli/       @EXPERIENCE_GITHUB_USER
+/crates/faultline-tui/       @EXPERIENCE_GITHUB_USER
+/crates/faultline-eval/      @EXPERIENCE_GITHUB_USER
+/crates/faultline-testkit/   @EXPERIENCE_GITHUB_USER
+/docs/                      @EXPERIENCE_GITHUB_USER
+/crates/faultline-contract/  @ENGINE_GITHUB_USER @EXPERIENCE_GITHUB_USER
+/Cargo.toml                 @ENGINE_GITHUB_USER @EXPERIENCE_GITHUB_USER
+/Cargo.lock                 @ENGINE_GITHUB_USER @EXPERIENCE_GITHUB_USER

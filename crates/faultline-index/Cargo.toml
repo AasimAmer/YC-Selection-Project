@@ -1,0 +1,13 @@
+[package]
+name = "faultline-index"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+rusqlite.workspace = true
+ignore.workspace = true
+notify.workspace = true
+faultline-parser.workspace = true
+faultline-core.workspace = true
+faultline-contract.workspace = true

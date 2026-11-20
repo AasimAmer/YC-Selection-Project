@@ -1,0 +1,12 @@
+digraph G {
+ graph[bgcolor="#0B1020",pad="0.43",rankdir=TB,nodesep="0.6",ranksep="0.6",splines=polyline,label="TWO PEOPLE • TWO INDEPENDENT WORKSTREAMS",labelloc=t,fontname="DejaVu Sans",fontsize=25,fontcolor="#E8EDF8"];
+ node[shape=box,style="rounded,filled",fontsize=17,fontname="DejaVu Sans",margin="0.26,0.19",fontcolor="#E8EDF8",penwidth=2];edge[arrowsize=.85,penwidth=2,color="#64748B"];
+ shared[label="G0  Frozen faultline-contract\nDTOs • EngineApi • schema fixtures",fillcolor="#173D48",color="#35D9E8"];
+ a[label="DEVELOPER A   /   ENGINE\nParser • resolver • graph • SQLite\nImpact • incremental equivalence",fillcolor="#2B1D31",color="#A78BFA"];
+ b[label="DEVELOPER B   /   EXPERIENCE\nCLI • TUI • mock engine • evaluator\nFixtures • benchmarks • docs • CI",fillcolor="#2A3126",color="#22C55E"];
+ ai[label="Real EngineApi adapter\nindependently tested",fillcolor="#181F33",color="#A78BFA"];
+ bi[label="Mock EngineApi + UI + evaluator\nindependently tested",fillcolor="#181F33",color="#22C55E"];
+ merge[label="G1  PRs + CI + reviewed integration\nSame snapshot in CLI and TUI",fillcolor="#174148",color="#35D9E8"];
+ shared->a;shared->b;a->ai;b->bi;ai->merge;bi->merge;
+ {rank=same;a;b;} {rank=same;ai;bi;}
+}

@@ -1,0 +1,902 @@
+{
+  "graph": {
+    "$defs": {
+      "EdgeKind": {
+        "enum": [
+          "calls",
+          "imports",
+          "exports",
+          "reexports",
+          "type_ref",
+          "extends",
+          "implements",
+          "test_reference"
+        ],
+        "type": "string"
+      },
+      "EvidenceEdge": {
+        "properties": {
+          "consumer": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "dependency": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SymbolId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "$ref": "#/$defs/EdgeKind"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          },
+          "resolution": {
+            "$ref": "#/$defs/ResolutionState"
+          }
+        },
+        "required": [
+          "consumer",
+          "kind",
+          "resolution",
+          "range"
+        ],
+        "type": "object"
+      },
+      "FileId": {
+        "type": "string"
+      },
+      "Freshness": {
+        "enum": [
+          "current",
+          "stale",
+          "indexing"
+        ],
+        "type": "string"
+      },
+      "GraphNode": {
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "kind": {
+            "$ref": "#/$defs/SymbolKind"
+          },
+          "name": {
+            "type": "string"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "range"
+        ],
+        "type": "object"
+      },
+      "PartialResultReason": {
+        "enum": [
+          "deadline",
+          "node_budget",
+          "hop_limit",
+          "result_limit"
+        ],
+        "type": "string"
+      },
+      "ResolutionState": {
+        "enum": [
+          "resolved",
+          "ambiguous",
+          "external",
+          "unresolved"
+        ],
+        "type": "string"
+      },
+      "SnapshotId": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "SourceLocation": {
+        "properties": {
+          "byte": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "line": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "line",
+          "byte"
+        ],
+        "type": "object"
+      },
+      "SourceRange": {
+        "properties": {
+          "end": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "repo_relative_file": {
+            "$ref": "#/$defs/FileId"
+          },
+          "start": {
+            "$ref": "#/$defs/SourceLocation"
+          }
+        },
+        "required": [
+          "repo_relative_file",
+          "start",
+          "end"
+        ],
+        "type": "object"
+      },
+      "SymbolId": {
+        "type": "string"
+      },
+      "SymbolKind": {
+        "enum": [
+          "function",
+          "class",
+          "method",
+          "variable",
+          "interface",
+          "type",
+          "module"
+        ],
+        "type": "string"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "edges": {
+        "items": {
+          "$ref": "#/$defs/EvidenceEdge"
+        },
+        "type": "array"
+      },
+      "freshness": {
+        "$ref": "#/$defs/Freshness"
+      },
+      "nodes": {
+        "items": {
+          "$ref": "#/$defs/GraphNode"
+        },
+        "type": "array"
+      },
+      "partial_reason": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/PartialResultReason"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "schema_version": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "snapshot_epoch": {
+        "$ref": "#/$defs/SnapshotId"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "unresolved_count": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "snapshot_epoch",
+      "freshness",
+      "truncated",
+      "unresolved_count",
+      "nodes",
+      "edges"
+    ],
+    "title": "GraphResponse",
+    "type": "object"
+  },
+  "health": {
+    "$defs": {
+      "Freshness": {
+        "enum": [
+          "current",
+          "stale",
+          "indexing"
+        ],
+        "type": "string"
+      },
+      "PartialResultReason": {
+        "enum": [
+          "deadline",
+          "node_budget",
+          "hop_limit",
+          "result_limit"
+        ],
+        "type": "string"
+      },
+      "SnapshotId": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "files": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "freshness": {
+        "$ref": "#/$defs/Freshness"
+      },
+      "partial_reason": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/PartialResultReason"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "resolved_edges": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "schema_version": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "snapshot_epoch": {
+        "$ref": "#/$defs/SnapshotId"
+      },
+      "symbols": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "unresolved_count": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "snapshot_epoch",
+      "freshness",
+      "truncated",
+      "unresolved_count",
+      "files",
+      "symbols",
+      "resolved_edges"
+    ],
+    "title": "IndexHealth",
+    "type": "object"
+  },
+  "impact": {
+    "$defs": {
+      "Concern": {
+        "enum": [
+          "high",
+          "medium",
+          "low"
+        ],
+        "type": "string"
+      },
+      "EdgeKind": {
+        "enum": [
+          "calls",
+          "imports",
+          "exports",
+          "reexports",
+          "type_ref",
+          "extends",
+          "implements",
+          "test_reference"
+        ],
+        "type": "string"
+      },
+      "EvidenceEdge": {
+        "properties": {
+          "consumer": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "dependency": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SymbolId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "$ref": "#/$defs/EdgeKind"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          },
+          "resolution": {
+            "$ref": "#/$defs/ResolutionState"
+          }
+        },
+        "required": [
+          "consumer",
+          "kind",
+          "resolution",
+          "range"
+        ],
+        "type": "object"
+      },
+      "FileId": {
+        "type": "string"
+      },
+      "Freshness": {
+        "enum": [
+          "current",
+          "stale",
+          "indexing"
+        ],
+        "type": "string"
+      },
+      "GraphNode": {
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "kind": {
+            "$ref": "#/$defs/SymbolKind"
+          },
+          "name": {
+            "type": "string"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "range"
+        ],
+        "type": "object"
+      },
+      "ImpactCandidate": {
+        "properties": {
+          "concern": {
+            "$ref": "#/$defs/Concern"
+          },
+          "evidence_unavailable": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "paths": {
+            "items": {
+              "items": {
+                "$ref": "#/$defs/EvidenceEdge"
+              },
+              "type": "array"
+            },
+            "type": "array"
+          },
+          "score": {
+            "format": "double",
+            "type": "number"
+          },
+          "score_meaning": {
+            "$ref": "#/$defs/ScoreMeaning"
+          },
+          "symbol": {
+            "$ref": "#/$defs/GraphNode"
+          }
+        },
+        "required": [
+          "symbol",
+          "score",
+          "score_meaning",
+          "concern",
+          "paths"
+        ],
+        "type": "object"
+      },
+      "PartialResultReason": {
+        "enum": [
+          "deadline",
+          "node_budget",
+          "hop_limit",
+          "result_limit"
+        ],
+        "type": "string"
+      },
+      "ResolutionState": {
+        "enum": [
+          "resolved",
+          "ambiguous",
+          "external",
+          "unresolved"
+        ],
+        "type": "string"
+      },
+      "ScoreMeaning": {
+        "enum": [
+          "ranking_heuristic"
+        ],
+        "type": "string"
+      },
+      "SnapshotId": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "SourceLocation": {
+        "properties": {
+          "byte": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "line": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "line",
+          "byte"
+        ],
+        "type": "object"
+      },
+      "SourceRange": {
+        "properties": {
+          "end": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "repo_relative_file": {
+            "$ref": "#/$defs/FileId"
+          },
+          "start": {
+            "$ref": "#/$defs/SourceLocation"
+          }
+        },
+        "required": [
+          "repo_relative_file",
+          "start",
+          "end"
+        ],
+        "type": "object"
+      },
+      "SymbolId": {
+        "type": "string"
+      },
+      "SymbolKind": {
+        "enum": [
+          "function",
+          "class",
+          "method",
+          "variable",
+          "interface",
+          "type",
+          "module"
+        ],
+        "type": "string"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "freshness": {
+        "$ref": "#/$defs/Freshness"
+      },
+      "partial_reason": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/PartialResultReason"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "processed_nodes": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "reached_nodes": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "results": {
+        "items": {
+          "$ref": "#/$defs/ImpactCandidate"
+        },
+        "type": "array"
+      },
+      "schema_version": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "snapshot_epoch": {
+        "$ref": "#/$defs/SnapshotId"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "unresolved_count": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "snapshot_epoch",
+      "freshness",
+      "truncated",
+      "unresolved_count",
+      "results",
+      "processed_nodes",
+      "reached_nodes"
+    ],
+    "title": "ImpactResponse",
+    "type": "object"
+  },
+  "references": {
+    "$defs": {
+      "EdgeKind": {
+        "enum": [
+          "calls",
+          "imports",
+          "exports",
+          "reexports",
+          "type_ref",
+          "extends",
+          "implements",
+          "test_reference"
+        ],
+        "type": "string"
+      },
+      "EvidenceEdge": {
+        "properties": {
+          "consumer": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "dependency": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SymbolId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "$ref": "#/$defs/EdgeKind"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          },
+          "resolution": {
+            "$ref": "#/$defs/ResolutionState"
+          }
+        },
+        "required": [
+          "consumer",
+          "kind",
+          "resolution",
+          "range"
+        ],
+        "type": "object"
+      },
+      "FileId": {
+        "type": "string"
+      },
+      "Freshness": {
+        "enum": [
+          "current",
+          "stale",
+          "indexing"
+        ],
+        "type": "string"
+      },
+      "PartialResultReason": {
+        "enum": [
+          "deadline",
+          "node_budget",
+          "hop_limit",
+          "result_limit"
+        ],
+        "type": "string"
+      },
+      "ResolutionState": {
+        "enum": [
+          "resolved",
+          "ambiguous",
+          "external",
+          "unresolved"
+        ],
+        "type": "string"
+      },
+      "SnapshotId": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "SourceLocation": {
+        "properties": {
+          "byte": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "line": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "line",
+          "byte"
+        ],
+        "type": "object"
+      },
+      "SourceRange": {
+        "properties": {
+          "end": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "repo_relative_file": {
+            "$ref": "#/$defs/FileId"
+          },
+          "start": {
+            "$ref": "#/$defs/SourceLocation"
+          }
+        },
+        "required": [
+          "repo_relative_file",
+          "start",
+          "end"
+        ],
+        "type": "object"
+      },
+      "SymbolId": {
+        "type": "string"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "freshness": {
+        "$ref": "#/$defs/Freshness"
+      },
+      "partial_reason": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/PartialResultReason"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "results": {
+        "items": {
+          "$ref": "#/$defs/EvidenceEdge"
+        },
+        "type": "array"
+      },
+      "schema_version": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "snapshot_epoch": {
+        "$ref": "#/$defs/SnapshotId"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "unresolved_count": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "snapshot_epoch",
+      "freshness",
+      "truncated",
+      "unresolved_count",
+      "results"
+    ],
+    "title": "ReferencesResponse",
+    "type": "object"
+  },
+  "search": {
+    "$defs": {
+      "FileId": {
+        "type": "string"
+      },
+      "Freshness": {
+        "enum": [
+          "current",
+          "stale",
+          "indexing"
+        ],
+        "type": "string"
+      },
+      "GraphNode": {
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/SymbolId"
+          },
+          "kind": {
+            "$ref": "#/$defs/SymbolKind"
+          },
+          "name": {
+            "type": "string"
+          },
+          "range": {
+            "$ref": "#/$defs/SourceRange"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "range"
+        ],
+        "type": "object"
+      },
+      "PartialResultReason": {
+        "enum": [
+          "deadline",
+          "node_budget",
+          "hop_limit",
+          "result_limit"
+        ],
+        "type": "string"
+      },
+      "SnapshotId": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "SourceLocation": {
+        "properties": {
+          "byte": {
+            "format": "uint64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "line": {
+            "format": "uint32",
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "line",
+          "byte"
+        ],
+        "type": "object"
+      },
+      "SourceRange": {
+        "properties": {
+          "end": {
+            "$ref": "#/$defs/SourceLocation"
+          },
+          "repo_relative_file": {
+            "$ref": "#/$defs/FileId"
+          },
+          "start": {
+            "$ref": "#/$defs/SourceLocation"
+          }
+        },
+        "required": [
+          "repo_relative_file",
+          "start",
+          "end"
+        ],
+        "type": "object"
+      },
+      "SymbolId": {
+        "type": "string"
+      },
+      "SymbolKind": {
+        "enum": [
+          "function",
+          "class",
+          "method",
+          "variable",
+          "interface",
+          "type",
+          "module"
+        ],
+        "type": "string"
+      }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "properties": {
+      "freshness": {
+        "$ref": "#/$defs/Freshness"
+      },
+      "partial_reason": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/PartialResultReason"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "results": {
+        "items": {
+          "$ref": "#/$defs/GraphNode"
+        },
+        "type": "array"
+      },
+      "schema_version": {
+        "format": "uint32",
+        "minimum": 0,
+        "type": "integer"
+      },
+      "snapshot_epoch": {
+        "$ref": "#/$defs/SnapshotId"
+      },
+      "truncated": {
+        "type": "boolean"
+      },
+      "unresolved_count": {
+        "format": "uint64",
+        "minimum": 0,
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "snapshot_epoch",
+      "freshness",
+      "truncated",
+      "unresolved_count",
+      "results"
+    ],
+    "title": "SearchResponse",
+    "type": "object"
+  }
+}

@@ -1,0 +1,11 @@
+[package]
+name = "faultline-cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+clap.workspace = true
+faultline-contract.workspace = true
+faultline-testkit.workspace = true
+serde_json.workspace = true

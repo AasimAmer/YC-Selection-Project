@@ -1,0 +1,8 @@
+[package]
+name = "faultline-core"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+faultline-contract.workspace = true

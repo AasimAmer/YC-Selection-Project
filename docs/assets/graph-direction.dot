@@ -1,0 +1,12 @@
+digraph G {
+ graph [bgcolor="#0B1020",pad="0.45",nodesep="0.7",ranksep="1",rankdir=TB,splines=polyline,label="DEPENDENCY direction (stored)   vs   IMPACT direction (queried)",labelloc=t,fontname="DejaVu Sans",fontsize=23,fontcolor="#E8EDF8"];
+ node [shape=box,style="rounded,filled",margin="0.32,0.22",fontsize=18,fontname="DejaVu Sans",fontcolor="#E8EDF8",color="#475569",fillcolor="#19263B",penwidth=2];edge[arrowsize=1.1,penwidth=3];
+ middleware[label="authorizeRequest()\napi/middleware.ts",color="#FB7185"];
+ login[label="handleLogin()\nroutes/login.ts",color="#FB7185"];
+ session[label="validateSession()\nauth/session.ts",color="#35D9E8",fillcolor="#104753"];
+ token[label="tokenStore()\nauth/token.ts",color="#94A3B8"];
+ middleware->session[color="#64748b",label=" calls",fontcolor="#A0ABC2"];
+ login->session[color="#64748b",label=" calls",fontcolor="#A0ABC2"];
+ session->token[color="#64748b",label=" uses",fontcolor="#A0ABC2"];
+ {rank=same;middleware;login;}
+}

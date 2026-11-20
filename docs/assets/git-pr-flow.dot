@@ -1,0 +1,12 @@
+digraph G {
+ graph[bgcolor="#0B1020",pad="0.5",rankdir=LR,nodesep="0.38",ranksep="0.64",splines=ortho,label="GITHUB: BRANCH → PR → CHECKS → REVIEW → MAIN",labelloc=t,fontname="DejaVu Sans",fontsize=23,fontcolor="#E8EDF8"];
+ node[shape=box,style="rounded,filled",fontsize=16,fontname="DejaVu Sans",margin="0.24,0.18",color="#445A75",fillcolor="#17243A",fontcolor="#E8EDF8",penwidth=2];edge[color="#6696AE",penwidth=2,arrowsize=.75];
+ main[label="main\ncontract-v1",color="#35D9E8"];
+ a[label="feat/a-...\nengine PR",color="#A78BFA"];
+ b[label="feat/b-...\nexperience PR",color="#22C55E"];
+ ci[label="CI\nfmt • clippy • tests",color="#F2BD4B"];
+ review[label="Independent\nreview",color="#F2BD4B"];
+ merged[label="main\nnext snapshot",color="#35D9E8"];
+ main->a;main->b;a->ci;b->ci;ci->review->merged;
+ {rank=same;a;b;}
+}
