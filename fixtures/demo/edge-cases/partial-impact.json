@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": true,
+  "partial_reason": "deadline",
+  "unresolved_count": 0,
+  "results": [
+    {
+      "symbol": {
+        "id": "src/middleware.ts::authorizeRequest",
+        "name": "authorizeRequest",
+        "kind": "function",
+        "range": {
+          "repo_relative_file": "src/middleware.ts",
+          "start": {
+            "line": 3,
+            "byte": 49
+          },
+          "end": {
+            "line": 5,
+            "byte": 142
+          }
+        }
+      },
+      "score": 90.0,
+      "score_meaning": "ranking_heuristic",
+      "concern": "high",
+      "paths": [
+        [
+          {
+            "consumer": "src/middleware.ts::authorizeRequest",
+            "dependency": "src/session.ts::validateSession",
+            "kind": "calls",
+            "resolution": "resolved",
+            "range": {
+              "repo_relative_file": "src/middleware.ts",
+              "start": {
+                "line": 4,
+                "byte": 117
+              },
+              "end": {
+                "line": 4,
+                "byte": 139
+              }
+            }
+          }
+        ]
+      ],
+      "evidence_unavailable": null
+    }
+  ],
+  "processed_nodes": 1,
+  "reached_nodes": 2
+}

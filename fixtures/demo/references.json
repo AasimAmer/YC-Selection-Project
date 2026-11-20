@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 0,
+  "results": [
+    {
+      "consumer": "src/audit.ts::auditSession",
+      "dependency": "src/session.ts::validateSession",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/audit.ts",
+        "start": {
+          "line": 4,
+          "byte": 112
+        },
+        "end": {
+          "line": 4,
+          "byte": 134
+        }
+      }
+    },
+    {
+      "consumer": "src/middleware.ts::authorizeRequest",
+      "dependency": "src/session.ts::validateSession",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/middleware.ts",
+        "start": {
+          "line": 4,
+          "byte": 117
+        },
+        "end": {
+          "line": 4,
+          "byte": 139
+        }
+      }
+    }
+  ]
+}
