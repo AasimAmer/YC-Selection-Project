@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 0,
+  "files": 6,
+  "symbols": 6,
+  "resolved_edges": 6
+}

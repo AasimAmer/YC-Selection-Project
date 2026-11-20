@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 0,
+  "results": [
+    {
+      "symbol": {
+        "id": "src/router.ts::routeRequest",
+        "name": "routeRequest",
+        "kind": "function",
+        "range": {
+          "repo_relative_file": "src/router.ts",
+          "start": {
+            "line": 4,
+            "byte": 108
+          },
+          "end": {
+            "line": 6,
+            "byte": 214
+          }
+        }
+      },
+      "score": 90.0,
+      "score_meaning": "ranking_heuristic",
+      "concern": "high",
+      "paths": [
+        [
+          {
+            "consumer": "src/router.ts::routeRequest",
+            "dependency": "src/middleware.ts::authorizeRequest",
+            "kind": "calls",
+            "resolution": "resolved",
+            "range": {
+              "repo_relative_file": "src/router.ts",
+              "start": {
+                "line": 5,
+                "byte": 172
+              },
+              "end": {
+                "line": 5,
+                "byte": 211
+              }
+            }
+          }
+        ]
+      ],
+      "evidence_unavailable": null
+    }
+  ],
+  "processed_nodes": 1,
+  "reached_nodes": 1
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 3,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 2,
+  "nodes": [
+    {
+      "id": "src/adapters.js::runValidation",
+      "name": "runValidation",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/adapters.js",
+        "start": {
+          "line": 4,
+          "byte": 423
+        },
+        "end": {
+          "line": 7,
+          "byte": 596
+        }
+      }
+    },
+    {
+      "id": "src/legacy/compatibility-for-checkout-integrations/historical-session-adapters-for-regional-storefronts/archive-of-client-facing-authentication-and-session-migrations/maintained-implementations-for-offline-and-international-checkout/以前のセッション検証の実装と統合/旧セッション.js::validateSession",
+      "name": "validateSession",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/legacy/compatibility-for-checkout-integrations/historical-session-adapters-for-regional-storefronts/archive-of-client-facing-authentication-and-session-migrations/maintained-implementations-for-offline-and-international-checkout/以前のセッション検証の実装と統合/旧セッション.js",
+        "start": {
+          "line": 2,
+          "byte": 22
+        },
+        "end": {
+          "line": 4,
+          "byte": 91
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "consumer": "src/adapters.js::runValidation",
+      "dependency": null,
+      "kind": "calls",
+      "resolution": "ambiguous",
+      "range": {
+        "repo_relative_file": "src/adapters.js",
+        "start": {
+          "line": 6,
+          "byte": 551
+        },
+        "end": {
+          "line": 6,
+          "byte": 566
+        }
+      }
+    },
+    {
+      "consumer": "src/adapters.js::runValidation",
+      "dependency": null,
+      "kind": "calls",
+      "resolution": "unresolved",
+      "range": {
+        "repo_relative_file": "src/adapters.js",
+        "start": {
+          "line": 6,
+          "byte": 570
+        },
+        "end": {
+          "line": 6,
+          "byte": 593
+        }
+      }
+    }
+  ]
+}

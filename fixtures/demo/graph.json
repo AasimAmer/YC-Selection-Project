@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 0,
+  "nodes": [
+    {
+      "id": "src/audit.ts::auditSession",
+      "name": "auditSession",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/audit.ts",
+        "start": {
+          "line": 3,
+          "byte": 49
+        },
+        "end": {
+          "line": 5,
+          "byte": 177
+        }
+      }
+    },
+    {
+      "id": "src/cycle/normalize.js::normalizeToken",
+      "name": "normalizeToken",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/cycle/normalize.js",
+        "start": {
+          "line": 3,
+          "byte": 44
+        },
+        "end": {
+          "line": 5,
+          "byte": 121
+        }
+      }
+    },
+    {
+      "id": "src/cycle/prefix.js::stripPrefix",
+      "name": "stripPrefix",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/cycle/prefix.js",
+        "start": {
+          "line": 3,
+          "byte": 50
+        },
+        "end": {
+          "line": 5,
+          "byte": 167
+        }
+      }
+    },
+    {
+      "id": "src/middleware.ts::authorizeRequest",
+      "name": "authorizeRequest",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/middleware.ts",
+        "start": {
+          "line": 3,
+          "byte": 49
+        },
+        "end": {
+          "line": 5,
+          "byte": 142
+        }
+      }
+    },
+    {
+      "id": "src/router.ts::routeRequest",
+      "name": "routeRequest",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/router.ts",
+        "start": {
+          "line": 4,
+          "byte": 108
+        },
+        "end": {
+          "line": 6,
+          "byte": 214
+        }
+      }
+    },
+    {
+      "id": "src/session.ts::validateSession",
+      "name": "validateSession",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/session.ts",
+        "start": {
+          "line": 1,
+          "byte": 0
+        },
+        "end": {
+          "line": 3,
+          "byte": 86
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "consumer": "src/audit.ts::auditSession",
+      "dependency": "src/session.ts::validateSession",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/audit.ts",
+        "start": {
+          "line": 4,
+          "byte": 112
+        },
+        "end": {
+          "line": 4,
+          "byte": 134
+        }
+      }
+    },
+    {
+      "consumer": "src/cycle/normalize.js::normalizeToken",
+      "dependency": "src/cycle/prefix.js::stripPrefix",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/cycle/normalize.js",
+        "start": {
+          "line": 4,
+          "byte": 93
+        },
+        "end": {
+          "line": 4,
+          "byte": 118
+        }
+      }
+    },
+    {
+      "consumer": "src/cycle/prefix.js::stripPrefix",
+      "dependency": "src/cycle/normalize.js::normalizeToken",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/cycle/prefix.js",
+        "start": {
+          "line": 4,
+          "byte": 126
+        },
+        "end": {
+          "line": 4,
+          "byte": 156
+        }
+      }
+    },
+    {
+      "consumer": "src/middleware.ts::authorizeRequest",
+      "dependency": "src/session.ts::validateSession",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/middleware.ts",
+        "start": {
+          "line": 4,
+          "byte": 117
+        },
+        "end": {
+          "line": 4,
+          "byte": 139
+        }
+      }
+    },
+    {
+      "consumer": "src/router.ts::routeRequest",
+      "dependency": "src/middleware.ts::authorizeRequest",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/router.ts",
+        "start": {
+          "line": 5,
+          "byte": 172
+        },
+        "end": {
+          "line": 5,
+          "byte": 211
+        }
+      }
+    },
+    {
+      "consumer": "src/router.ts::routeRequest",
+      "dependency": "src/cycle/normalize.js::normalizeToken",
+      "kind": "calls",
+      "resolution": "resolved",
+      "range": {
+        "repo_relative_file": "src/router.ts",
+        "start": {
+          "line": 5,
+          "byte": 189
+        },
+        "end": {
+          "line": 5,
+          "byte": 210
+        }
+      }
+    }
+  ]
+}

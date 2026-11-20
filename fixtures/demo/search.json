@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "snapshot_epoch": 2,
+  "freshness": "current",
+  "truncated": false,
+  "partial_reason": null,
+  "unresolved_count": 0,
+  "results": [
+    {
+      "id": "src/audit.ts::auditSession",
+      "name": "auditSession",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/audit.ts",
+        "start": {
+          "line": 3,
+          "byte": 49
+        },
+        "end": {
+          "line": 5,
+          "byte": 177
+        }
+      }
+    },
+    {
+      "id": "src/session.ts::validateSession",
+      "name": "validateSession",
+      "kind": "function",
+      "range": {
+        "repo_relative_file": "src/session.ts",
+        "start": {
+          "line": 1,
+          "byte": 0
+        },
+        "end": {
+          "line": 3,
+          "byte": 86
+        }
+      }
+    }
+  ]
+}
